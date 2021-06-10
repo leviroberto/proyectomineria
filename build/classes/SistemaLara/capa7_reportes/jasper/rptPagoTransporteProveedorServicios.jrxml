@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="670" pageHeight="600" columnWidth="630" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="codigo" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="logo" class="java.io.InputStream">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT 
+pt.PagoTransporte_Id,
+pt.PagoTransporte_Fecha,
+pt.PagoTransporte_NroFactura,
+pt.PagoTransporte_Peso,
+pt.PagoTransporte_Precio,
+pt.PagoTransporte_Total,
+pt.PagoTransporte_Detraccion,
+pt.PagoTransporte_Descontar,
+pt.PagoTransporte_Adelanto,
+pt.PagoTransporte_Importe,
+pt.PagoTransporte_FechaPago,
+pt.PagoTransporte_FechaRegistro,
+ps.ProveedorServicio_Razon_Social,
+ps.ProveedorServicio_Ruc,
+tp.TipoCliente_Descripcion,
+pt.PagoTransporte_Estado,
+em.Empresa_Nombre_Comercial,
+em.Empresa_Direccion,
+em.Empresa_Nro_Documento
+from pago_transporte as pt 
+INNER JOIN proveedor_servicio as ps on ps.ProveedorServicio_Id=pt.ProveedorServicio_Id 
+INNER JOIN tipo_cliente as tp on tp.TipoCliente_Id=pt.TipoCliente_Id
+inner join empresa as em on pt.Empresa_Id=em.Empresa_id
+WHERE pt.PagoTransporte_Id=$P{codigo} and pt.PagoTransporte_Estado='No Pagado']]>
+	</queryString>
+	<field name="PagoTransporte_Id" class="java.lang.Integer"/>
+	<field name="PagoTransporte_Fecha" class="java.sql.Date"/>
+	<field name="PagoTransporte_NroFactura" class="java.lang.String"/>
+	<field name="PagoTransporte_Peso" class="java.math.BigDecimal"/>
+	<field name="PagoTransporte_Precio" class="java.math.BigDecimal"/>
+	<field name="PagoTransporte_Total" class="java.math.BigDecimal"/>
+	<field name="PagoTransporte_Detraccion" class="java.math.BigDecimal"/>
+	<field name="PagoTransporte_Descontar" class="java.lang.String"/>
+	<field name="PagoTransporte_Adelanto" class="java.math.BigDecimal"/>
+	<field name="PagoTransporte_Importe" class="java.math.BigDecimal"/>
+	<field name="PagoTransporte_FechaPago" class="java.sql.Date"/>
+	<field name="PagoTransporte_FechaRegistro" class="java.sql.Timestamp"/>
+	<field name="ProveedorServicio_Razon_Social" class="java.lang.String"/>
+	<field name="ProveedorServicio_Ruc" class="java.lang.String"/>
+	<field name="TipoCliente_Descripcion" class="java.lang.String"/>
+	<field name="PagoTransporte_Estado" class="java.lang.String"/>
+	<field name="Empresa_Nombre_Comercial" class="java.lang.String"/>
+	<field name="Empresa_Direccion" class="java.lang.String"/>
+	<field name="Empresa_Nro_Documento" class="java.lang.String"/>
+	<title>
+		<band height="122" splitType="Stretch">
+			<staticText>
+				<reportElement x="241" y="26" width="378" height="20"/>
+				<box>
+					<bottomPen lineWidth="1.0" lineColor="#FF0000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PAGO TRANSPORTE POR PROVEEDOR SERVICIO ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="241" y="46" width="378" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Empresa_Nombre_Comercial}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="241" y="66" width="378" height="28"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Empresa_Direccion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="389" y="94" width="230" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Empresa_Nro_Documento}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="342" y="94" width="47" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[R.U.C:]]></text>
+			</staticText>
+			<image>
+				<reportElement x="10" y="11" width="221" height="103"/>
+				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="81" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="1" width="630" height="72" backcolor="#33B5E5"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="10" y="14" width="123" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Proveedor Servicios:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="133" y="14" width="225" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{ProveedorServicio_Razon_Social}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="95" y="34" width="38" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[R.U.C:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="133" y="34" width="225" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{ProveedorServicio_Ruc}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="416" y="14" width="80" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha Registro:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="496" y="14" width="123" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{PagoTransporte_FechaRegistro}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="427" y="34" width="69" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha Pago:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="496" y="34" width="123" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{PagoTransporte_FechaPago}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="49" height="20" forecolor="#FFFFFF" backcolor="#415EFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cod.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="49" y="0" width="84" height="20" forecolor="#FFFFFF" backcolor="#415EFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo Cliente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="133" y="0" width="82" height="20" forecolor="#FFFFFF" backcolor="#415EFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Detraccion]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="215" y="0" width="65" height="20" forecolor="#FFFFFF" backcolor="#415EFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Adelanto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="280" y="0" width="78" height="20" forecolor="#FFFFFF" backcolor="#415EFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Descuento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="358" y="0" width="69" height="20" forecolor="#000000" backcolor="#F15655"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Precio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="427" y="0" width="54" height="20" forecolor="#FFFFFF" backcolor="#415EFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Peso]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="481" y="0" width="49" height="20" forecolor="#000000" backcolor="#F15655"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Estado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="530" y="0" width="100" height="20" forecolor="#000000" backcolor="#F15655"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Importe]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="49" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{PagoTransporte_Id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="49" y="0" width="84" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{TipoCliente_Descripcion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="133" y="0" width="82" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{PagoTransporte_Detraccion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="215" y="0" width="65" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{PagoTransporte_Adelanto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="280" y="0" width="78" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{PagoTransporte_Descontar}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="358" y="0" width="69" height="20" backcolor="#F15655"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{PagoTransporte_Precio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="427" y="0" width="54" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{PagoTransporte_Peso}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="481" y="0" width="49" height="20" backcolor="#F15655"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{PagoTransporte_Estado}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="530" y="0" width="100" height="20" backcolor="#F15655"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{PagoTransporte_Importe}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="45" splitType="Stretch">
+			<rectangle>
+				<reportElement x="456" y="4" width="163" height="37"/>
+			</rectangle>
+			<textField>
+				<reportElement mode="Opaque" x="521" y="13" width="88" height="20" forecolor="#FFFFFF" backcolor="#415EFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{PagoTransporte_Total}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="469" y="13" width="52" height="20" forecolor="#FFFFFF" backcolor="#F15655"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL:]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

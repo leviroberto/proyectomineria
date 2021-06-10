@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="670" pageHeight="640" columnWidth="630" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b0ffa0d9-d266-49b1-bcf2-42cd8bdc50a5">
+	<property name="ireport.zoom" value="1.4641000000000006"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="codigo" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="logo" class="java.io.InputStream">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT 
+li.Liquidacion_Id,
+li.Procedencia_Id,
+li.Liquidacion_Fecha,
+li.ClienteEntrante_Id, 
+li.Liquidacion_Lote, 
+li.Liquidacion_Tmh, 
+li.Liquidacion_H2O,
+li.Liquidacion_Tms, 
+li.Liquidacion_Leyau, 
+li.Liquidacion_Leyag, 
+li.Liquidacion_Inter,
+li.Liquidacion_Rec, 
+li.Liquidacion_Maquilla,
+li.Liquidacion_Factor,
+li.Liquidacion_Conscon, 
+li.Liquidacion_Escalador,
+li.Liquidacion_Stms, 
+li.Liquidacion_Totalus,
+li.Liquidacion_Reintegro,
+li.Liquidacion_Facturado,
+li.Liquidacion_Estado,
+em.Empresa_Nombre_Comercial,
+em.Empresa_Direccion,
+em.Empresa_Nro_Documento,
+concat(cli.ClienteEntrante_Nombres,' ',cli.ClienteEntrante_Apellidos) as cliente,
+pro.Procedencia_Descripcion
+FROM liquidacion as li inner join empresa as em on li.Empresa_Id=em.Empresa_id inner join cliente_entrante as cli on li.ClienteEntrante_Id=cli.ClienteEntrante_Id inner join procedencia as pro on li.Procedencia_Id=pro.Procedencia_Id
+WHERE Liquidacion_Id=$P{codigo}]]>
+	</queryString>
+	<field name="Liquidacion_Id" class="java.lang.Integer"/>
+	<field name="Procedencia_Id" class="java.lang.Integer"/>
+	<field name="Liquidacion_Fecha" class="java.sql.Date"/>
+	<field name="ClienteEntrante_Id" class="java.lang.Integer"/>
+	<field name="Liquidacion_Lote" class="java.lang.Integer"/>
+	<field name="Liquidacion_Tmh" class="java.lang.String"/>
+	<field name="Liquidacion_H2O" class="java.lang.String"/>
+	<field name="Liquidacion_Tms" class="java.lang.String"/>
+	<field name="Liquidacion_Leyau" class="java.lang.String"/>
+	<field name="Liquidacion_Leyag" class="java.lang.String"/>
+	<field name="Liquidacion_Inter" class="java.lang.String"/>
+	<field name="Liquidacion_Rec" class="java.lang.String"/>
+	<field name="Liquidacion_Maquilla" class="java.lang.String"/>
+	<field name="Liquidacion_Factor" class="java.lang.String"/>
+	<field name="Liquidacion_Conscon" class="java.lang.String"/>
+	<field name="Liquidacion_Escalador" class="java.lang.String"/>
+	<field name="Liquidacion_Stms" class="java.lang.String"/>
+	<field name="Liquidacion_Totalus" class="java.lang.String"/>
+	<field name="Liquidacion_Reintegro" class="java.lang.String"/>
+	<field name="Liquidacion_Facturado" class="java.lang.String"/>
+	<field name="Liquidacion_Estado" class="java.lang.String"/>
+	<field name="Empresa_Nombre_Comercial" class="java.lang.String"/>
+	<field name="Empresa_Direccion" class="java.lang.String"/>
+	<field name="Empresa_Nro_Documento" class="java.lang.String"/>
+	<field name="cliente" class="java.lang.String"/>
+	<field name="Procedencia_Descripcion" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="158" splitType="Stretch">
+			<image>
+				<reportElement x="12" y="4" width="326" height="85" uuid="f3216d47-94a6-4233-865e-207ad24516a7"/>
+				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="20" y="89" width="471" height="20" uuid="b47d6aed-ca58-4b24-a3d7-fef60f2da031"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Empresa_Nombre_Comercial}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="20" y="109" width="583" height="20" uuid="dd012955-657c-45f9-8ab8-bccb60caac78"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Empresa_Direccion}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="20" y="129" width="37" height="20" uuid="1ddf9337-8f81-4bbb-8c2e-9a99ff13f82c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[R.U.C:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="57" y="129" width="151" height="20" uuid="3eec2446-04cd-46f6-90f2-e5e64a34635a"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Empresa_Nro_Documento}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="52" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="1" width="630" height="40" uuid="39c0bfb7-86f6-45d8-8c31-d3ea08c88618"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="24" y="1" width="68" height="20" uuid="c2e8e13b-395e-4588-b358-4584dacea730"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cliente:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="92" y="1" width="290" height="20" uuid="ecd0e0da-14c0-4690-984a-b5bf65d6a0e7"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{cliente}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="5" y="21" width="87" height="20" uuid="e28c9b56-1cf4-493d-958c-6c5529d937a8"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Procedencia:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="92" y="21" width="181" height="20" uuid="633caeba-14b6-40d4-8c5c-b432a9d74132"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Procedencia_Descripcion}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="390" y="1" width="111" height="20" uuid="dfda4416-068e-464b-8f4f-f38b0747c140"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha Liquidación:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="501" y="1" width="129" height="20" uuid="f0dfadf3-db7f-4bac-a366-669a2acc265a"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Liquidacion_Fecha}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="349" y="21" width="100" height="20" uuid="876780e3-c250-4ebc-b9ff-2414848ca9d6"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Liquidacion_Reintegro}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="286" y="21" width="63" height="20" uuid="4008e8b1-76e3-44ce-b058-9491ea7bc6cf"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Reintegro:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="461" y="21" width="64" height="20" uuid="232ae94e-1d39-411c-93db-9dac2aeb156f"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Facturado:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="525" y="21" width="105" height="20" uuid="65167e47-93f7-48c9-a82e-1c9b70e53fec"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Liquidacion_Facturado}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="5" y="0" width="70" height="20" forecolor="#FFFFFF" backcolor="#415EFF" uuid="e71767fb-9695-4c72-b2ad-8383cc28fbe7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Lote]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="75" y="0" width="47" height="20" forecolor="#FFFFFF" backcolor="#415EFF" uuid="baf96fd3-db6a-4f84-859d-84998517d6e6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tmh]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="122" y="0" width="49" height="20" forecolor="#FFFFFF" backcolor="#415EFF" uuid="ba1f2d7e-2064-490f-9682-af0edb1228c3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[H2O]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="171" y="0" width="50" height="20" forecolor="#FFFFFF" backcolor="#415EFF" uuid="c3c6b32e-69ba-4d4e-be51-9d3a7932de81"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tms]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="221" y="0" width="48" height="20" forecolor="#FFFFFF" backcolor="#415EFF" uuid="56ad9d0c-c795-41e1-8898-c42e4f8eb002"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ley au]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="269" y="0" width="47" height="20" forecolor="#FFFFFF" backcolor="#415EFF" uuid="5139ff67-c29b-4f59-b58d-b5fa8e5b291b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ley ag]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="316" y="0" width="41" height="20" forecolor="#FFFFFF" backcolor="#415EFF" uuid="ce53a448-7e41-4d77-b3f0-3a49d48e5343"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Inter]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="357" y="0" width="34" height="20" forecolor="#FFFFFF" backcolor="#415EFF" uuid="2a950272-6793-4440-9ba6-2f817baf29dd"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Rec]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="391" y="0" width="44" height="20" forecolor="#FFFFFF" backcolor="#415EFF" uuid="a8ffc07a-9b90-43a8-83c7-2b108ea3903a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Maquilla]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="473" y="0" width="46" height="20" forecolor="#FFFFFF" backcolor="#415EFF" uuid="4f46ef3f-feca-4cee-9397-a684bd49700b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Conscon]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="519" y="0" width="59" height="20" forecolor="#FFFFFF" backcolor="#415EFF" uuid="1d3694d6-2fe6-4813-92b1-3c591505790a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Stms]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="435" y="0" width="38" height="20" forecolor="#FFFFFF" backcolor="#415EFF" uuid="50467b5b-3d1e-46fd-8ee1-acdbc1681f27"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Factor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="578" y="0" width="52" height="20" forecolor="#FFFFFF" backcolor="#415EFF" uuid="523ce93f-5133-439b-9e8d-e054376693de"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Us]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="23" splitType="Stretch">
+			<textField>
+				<reportElement x="5" y="0" width="70" height="20" uuid="c3246a6b-c197-4655-aaf2-97cd766c619c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Liquidacion_Lote}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="75" y="0" width="47" height="20" uuid="f7245138-5edd-4e2c-8277-6862ef6f3db3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Liquidacion_Tmh}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="122" y="0" width="49" height="20" uuid="33b0850c-8146-445f-82f3-a08d06ff30f9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Liquidacion_H2O}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="171" y="0" width="50" height="20" uuid="4a1f1480-fd87-44c5-a85e-e8dfee1e40f8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Liquidacion_Tms}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="221" y="0" width="48" height="20" uuid="a6c551b8-276b-4312-9253-f1d0843823f3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Liquidacion_Leyau}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="269" y="0" width="47" height="20" uuid="c6cea109-3298-4f67-8d08-315e61b98b7f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Liquidacion_Leyag}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="316" y="0" width="41" height="20" uuid="cca29d4f-0b31-47f7-93b7-73d2bfb243aa"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Liquidacion_Inter}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="357" y="0" width="34" height="20" uuid="8b2c83fb-f954-4f29-b347-51ddd58c89c2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Liquidacion_Rec}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="391" y="0" width="44" height="20" uuid="843f823f-688b-4137-961d-e767b58900c9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Liquidacion_Maquilla}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="473" y="0" width="46" height="20" uuid="72e0064f-5f6f-4687-87a7-db247c0ceb6f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Liquidacion_Conscon}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="519" y="0" width="59" height="20" uuid="3a60a2c4-da7a-41b8-898b-ba1c2ef4d02c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Liquidacion_Stms}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="435" y="0" width="38" height="20" uuid="400edaf7-e2c0-4d6a-84b0-b866a5da2c67"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Liquidacion_Factor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="578" y="0" width="52" height="20" uuid="f61e01e3-1d36-4e54-bd1b-71fcc4e84614"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Liquidacion_Totalus}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="4" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="25" splitType="Stretch"/>
+	</summary>
+</jasperReport>

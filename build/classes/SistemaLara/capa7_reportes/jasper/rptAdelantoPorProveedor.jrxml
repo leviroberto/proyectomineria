@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="670" pageHeight="640" columnWidth="630" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ea3bad5a-78b8-4921-bc8f-076ec4a17ac6">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="codigo" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="totalNoPagadoSoles" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="totalNoPagadoDolares" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="logo" class="java.io.InputStream">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT 
+a.Adelanto_Id,
+a.Adelanto_Cantidad,
+a.Adelanto_Moneda,
+a.Adelanto_Descripcion,
+a.Adelanto_Fecha,
+a.Adeelanto_Estado,
+ce.ProveedorServicio_Razon_Social,
+ce.ProveedorServicio_Ruc,
+ce.ProveedorServicio_Direccion,
+em.Empresa_Nombre_Comercial,
+em.Empresa_Direccion
+from adelanto_proveedor as a INNER JOIN proveedor_servicio as ce on ce.ProveedorServicio_Id=a.ProveedorServicio_Id
+INNER JOIN empresa as em on em.Empresa_id=a.Empresa_Id WHERE a.Adeelanto_Estado='No Pagado' and ce.ProveedorServicio_Id=$P{codigo}
+ORDER BY a.Adelanto_Fecha ASC]]>
+	</queryString>
+	<field name="Adelanto_Id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Adelanto_Cantidad" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Adelanto_Moneda" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Adelanto_Descripcion" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Adelanto_Fecha" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Adeelanto_Estado" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ProveedorServicio_Razon_Social" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ProveedorServicio_Ruc" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ProveedorServicio_Direccion" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Empresa_Nombre_Comercial" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Empresa_Direccion" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="157" splitType="Stretch">
+			<rectangle>
+				<reportElement mode="Opaque" x="0" y="0" width="630" height="95" forecolor="#FFFFFF" backcolor="#FFFFFF" uuid="0f390fab-5a20-4c03-b04b-d34ec2e724ee"/>
+			</rectangle>
+			<line direction="BottomUp">
+				<reportElement x="0" y="0" width="24" height="18" forecolor="#FFFFFF" uuid="7844c6e5-b910-4cc4-a8f3-5e2ba17255ea"/>
+			</line>
+			<line direction="BottomUp">
+				<reportElement x="1" y="0" width="36" height="29" forecolor="#FFFFFF" uuid="fd2613c3-4a2f-4141-99c7-2ea68064ee4c"/>
+			</line>
+			<line>
+				<reportElement x="240" y="0" width="79" height="95" forecolor="#FFFFFF" uuid="c0247c2e-c742-4937-808b-7bd7e7065567"/>
+			</line>
+			<image>
+				<reportElement x="5" y="4" width="302" height="80" uuid="51a7121d-4ff4-43b4-a707-fe920a10e4cf"/>
+				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="319" y="9" width="297" height="20" uuid="6d91f3b0-e594-4300-a753-19996b941250"/>
+				<box>
+					<bottomPen lineWidth="1.0" lineColor="#CC0033"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ADELANTOS PROVEEDPR]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="319" y="29" width="297" height="20" uuid="b3f70a33-b6e0-4202-88d7-c479698046f6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ProveedorServicio_Razon_Social}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="479" y="75" width="137" height="20" uuid="4d806f46-8e26-4969-88ee-81939e1ef807"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{ProveedorServicio_Ruc}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="319" y="75" width="160" height="20" uuid="673babb3-01b2-43d4-8292-09c54e97e02e"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[R.U.C :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="319" y="49" width="297" height="26" uuid="69e0ad6c-d120-4c4d-aa88-dfdb05ec1119"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{ProveedorServicio_Direccion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="13" y="113" width="427" height="20" uuid="64ec8878-de65-4a6a-ad8f-7abada6f6a25"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Empresa_Nombre_Comercial}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="3" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="2" y="0" width="35" height="20" forecolor="#FFFFFF" backcolor="#F15655" uuid="83283c6d-0c69-4d5f-9691-00825f66797f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cod.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="36" y="0" width="66" height="20" backcolor="#FFFF33" uuid="c25b3768-b015-4805-89ed-dabcc1aea4d2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Importe]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="102" y="0" width="52" height="20" forecolor="#FFFFFF" backcolor="#F15655" uuid="55e15f26-60e1-4167-a245-3dae3ccb6251"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Moneda]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="154" y="0" width="286" height="20" forecolor="#FFFFFF" backcolor="#F15655" uuid="31888c46-4f15-403e-a511-068bd647e531"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Descripcion]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="440" y="0" width="100" height="20" backcolor="#FFFF33" uuid="a3f28d27-f907-4341-91a5-69f68bd26354"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Estado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="540" y="0" width="90" height="20" forecolor="#FFFFFF" backcolor="#F15655" uuid="5f1e4810-0f1e-4a43-b3b1-d7e1b97f0a6d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<textField>
+				<reportElement x="2" y="0" width="35" height="20" uuid="34727eba-84f5-4165-b374-a2a70299044f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Adelanto_Id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="36" y="0" width="66" height="30" backcolor="#FFFF33" uuid="862ad3f7-02f8-4c39-8050-73ed1a55ab62"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Adelanto_Cantidad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="102" y="0" width="52" height="20" uuid="190d2199-26d6-4b31-b0cf-95f5c6f075af"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Adelanto_Moneda}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="154" y="0" width="286" height="30" uuid="565b531c-442d-4ee4-8afe-4a4241fe328e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Adelanto_Descripcion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="440" y="0" width="100" height="30" backcolor="#FFFF33" uuid="f6331a79-9b53-402d-9564-1c664e97d990"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{Adeelanto_Estado}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="540" y="0" width="90" height="20" uuid="9f4996f1-d3a8-4d23-9de9-026a2de5f3dd"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Adelanto_Fecha}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="2" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="2" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="78" splitType="Stretch">
+			<rectangle>
+				<reportElement x="440" y="15" width="176" height="20" uuid="f7f1baf2-1d52-4f4f-bc27-cfac5661d44e"/>
+			</rectangle>
+			<staticText>
+				<reportElement mode="Opaque" x="440" y="15" width="176" height="20" forecolor="#FFFFFF" backcolor="#F15655" uuid="1d80d24a-37d8-4c78-b89b-09f5eceae906"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DETALLE]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="440" y="35" width="100" height="20" uuid="3dfc9e40-a55a-4158-8a81-d8434c681ca0"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="440" y="35" width="100" height="20" uuid="57f03247-2b38-492f-bb81-274ca5e7d2a4"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total No Pagado S/.:]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="440" y="55" width="100" height="20" uuid="a70d2ee0-434b-45dd-8094-74e66ff43fbd"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="440" y="55" width="100" height="20" uuid="bb0b7697-68f3-42b1-97fc-4cd97b0e42d2"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total No Pagado $.:]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="540" y="35" width="76" height="20" uuid="aa9c123e-d826-44d7-b852-9d48879ee872"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="540" y="55" width="76" height="20" uuid="8b8722bb-0c6f-487b-9994-22d999a06303"/>
+			</rectangle>
+			<textField>
+				<reportElement x="540" y="35" width="76" height="20" uuid="e1050895-7d89-4614-beed-b80f6c1edbe0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{totalNoPagadoSoles}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="540" y="55" width="76" height="20" uuid="5ad2c990-7a28-419e-aa4e-3a41934fe74e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{totalNoPagadoDolares}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

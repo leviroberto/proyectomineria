@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="660" pageHeight="800" columnWidth="620" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f6367d7d-fad5-4b3d-a8c3-66e2dcc4b017">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="codigo" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="logo" class="java.io.InputStream">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT 
+p.ProveedorServicio_Razon_Social,
+p.ProveedorServicio_Direccion,
+p.ProveedorServicio_Ruc,
+n.NotaDebito_NumeroNotaDebito,
+n.NotaDebito_NumeroFactura,
+n.NotaDebito_Denominacion,
+DATE_FORMAT(n.NotaDebito_FechaEmision,'%d/%m/%Y') as fechaemi,
+DATE_FORMAT(n.NotaDebito_FechaEmision_Comprobante,'%d/%m/%Y') as fechaemicompro,
+n.NotaDebito_Consecion,
+n.NotaDebito_CodigoUnico,
+n.NotaDebito_ValorVenta,
+n.NotaDebito_IGV,
+n.NotaDebito_Total,
+n.NotaDebito_Moneda,
+n.NotaDebito_Lectura,
+nt.NotaDebitoDetalle_Cantidad,
+nt.NotaDebitoDetalle_Unidad,
+nt.NotaDebitoDetalle_Descripcion,
+nt.NotaDebitoDetalle_PrecioUnitario,
+nt.NotaDebitoDetalle_ValorVenta,
+em.Empresa_Nro_Documento,
+em.Empresa_Nombre_Comercial,
+em.Empresa_Direccion
+from nota_debito as n inner join notadebitodetalle as nt on n.NotaDebito_Id=nt.NotaDebito_Id
+inner join proveedor_servicio as p on n.ProveedorServicio_Id=p.ProveedorServicio_Id 
+inner join empresa as em on n.Empresa_Id=n.Empresa_Id
+where n.NotaDebito_Id=$P{codigo} and nt.Estado_Id=1]]>
+	</queryString>
+	<field name="ProveedorServicio_Razon_Social" class="java.lang.String"/>
+	<field name="ProveedorServicio_Direccion" class="java.lang.String"/>
+	<field name="ProveedorServicio_Ruc" class="java.lang.String"/>
+	<field name="NotaDebito_NumeroNotaDebito" class="java.lang.String"/>
+	<field name="NotaDebito_NumeroFactura" class="java.lang.String"/>
+	<field name="NotaDebito_Denominacion" class="java.lang.String"/>
+	<field name="fechaemi" class="java.lang.String"/>
+	<field name="fechaemicompro" class="java.lang.String"/>
+	<field name="NotaDebito_Consecion" class="java.lang.String"/>
+	<field name="NotaDebito_CodigoUnico" class="java.lang.String"/>
+	<field name="NotaDebito_ValorVenta" class="java.math.BigDecimal"/>
+	<field name="NotaDebito_IGV" class="java.math.BigDecimal"/>
+	<field name="NotaDebito_Total" class="java.math.BigDecimal"/>
+	<field name="NotaDebito_Moneda" class="java.lang.String"/>
+	<field name="NotaDebito_Lectura" class="java.lang.String"/>
+	<field name="NotaDebitoDetalle_Cantidad" class="java.lang.Integer"/>
+	<field name="NotaDebitoDetalle_Unidad" class="java.lang.String"/>
+	<field name="NotaDebitoDetalle_Descripcion" class="java.lang.String"/>
+	<field name="NotaDebitoDetalle_PrecioUnitario" class="java.math.BigDecimal"/>
+	<field name="NotaDebitoDetalle_ValorVenta" class="java.math.BigDecimal"/>
+	<field name="Empresa_Nro_Documento" class="java.lang.String"/>
+	<field name="Empresa_Nombre_Comercial" class="java.lang.String"/>
+	<field name="Empresa_Direccion" class="java.lang.String"/>
+	<title>
+		<band height="134" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="191" height="120" uuid="9aefde68-0d78-450d-b05f-2a1c07eefc68"/>
+				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+			<rectangle>
+				<reportElement x="443" y="19" width="175" height="70" uuid="ab69e0fb-e34e-4806-a0ac-c7c9b7c83720"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="443" y="19" width="37" height="20" uuid="60880efb-4c62-4041-9e95-2217cc5e25ea"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RUC:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="480" y="19" width="138" height="20" uuid="2a5bd4a7-b086-446b-ae65-5be238bc918b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Empresa_Nro_Documento}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="443" y="39" width="175" height="27" backcolor="#0084EB" uuid="e482c407-c246-48b9-b0eb-40160f467fd5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOTA DE DEBITO]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="443" y="66" width="175" height="23" uuid="68b60f92-3130-4517-8cdd-1bf24d8c3ccf"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NotaDebito_NumeroNotaDebito}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="191" y="19" width="241" height="36" uuid="a44dd47d-ecdc-489e-83be-67a46e175aa1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Empresa_Nombre_Comercial}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="191" y="75" width="241" height="45" uuid="f3584a61-3df1-438c-95e4-3fc522698847"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Empresa_Direccion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="278" y="55" width="115" height="20" uuid="6528524c-6e14-4e24-84e5-6e35226a546c"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Empresa_Nro_Documento}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="242" y="55" width="36" height="20" uuid="d85f7d84-309e-4307-8035-c34ef5f7f7f2"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RUC:]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="2" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="126" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="3" width="618" height="98" forecolor="#FFFFFF" backcolor="#0084EB" uuid="8a7269e5-560d-4800-8470-27e0a5566357"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="8" y="14" width="73" height="20" uuid="bb7c71a7-4872-463c-bf5d-b6b2c6799026"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Señor(res):]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="82" y="14" width="297" height="20" uuid="73138322-0b0b-42b7-9d33-f18b1c6b9542"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ProveedorServicio_Razon_Social}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="16" y="34" width="65" height="20" uuid="066f37b3-ef55-4cb6-947a-f511bcdf5a13"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Dirección:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="82" y="34" width="360" height="20" uuid="084f4801-a133-407e-8d8d-4cf9d794f265"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ProveedorServicio_Direccion}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="48" y="54" width="33" height="20" uuid="1c198582-6c57-4af9-8cf9-9086f0777712"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RUC:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="82" y="54" width="192" height="20" uuid="bfa4dece-9d01-4093-8061-0a3a66666db1"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ProveedorServicio_Ruc}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="8" y="74" width="73" height="20" uuid="24471114-16d8-4eb1-b1cd-bc30edddcf1b"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha Emi:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="310" y="74" width="179" height="20" uuid="3803cd4e-1662-4efa-9af3-836afa6e92a2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha Emision Comprobante:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="389" y="54" width="100" height="20" uuid="fd3f66b0-982a-4fb4-abb4-354b08701b4e"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Denominación:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="490" y="54" width="111" height="20" uuid="9a8922bd-d8a3-4444-aa68-19563202c7ff"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NotaDebito_Denominacion}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="458" y="34" width="31" height="20" uuid="55701dc4-575a-47fa-af26-caba363aed3d"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nº:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="490" y="34" width="111" height="20" uuid="47187f5b-5b24-49e6-9c1b-5eb72c120298"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NotaDebito_NumeroFactura}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="0" y="105" width="620" height="20" uuid="cd90bfb3-eacf-4a94-b11e-4189d5abc4f7"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="105" width="50" height="21" uuid="1566aa90-d943-4919-9772-da3bc9a810b1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cantidad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="50" y="105" width="55" height="20" uuid="02292842-a76a-4301-8925-40868f2a46f8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Unidad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="105" y="105" width="327" height="20" uuid="59cbe544-e918-4272-b68b-97121b415d8c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Descripción]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="432" y="105" width="95" height="20" forecolor="#FFFFFF" backcolor="#000000" uuid="50b60f2f-b064-4e6c-bef5-bb7e241f3916"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[P. Unitario]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="527" y="105" width="93" height="20" forecolor="#FFFFFF" backcolor="#000000" uuid="2ec130a0-f04e-40ee-89cc-f2216969a5b7"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Valor de Venta]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="82" y="74" width="192" height="20" uuid="c1ad7cf1-fcf9-4b1e-8ec7-8975ce96095b"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fechaemi}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="490" y="74" width="111" height="20" uuid="d706d207-1645-4177-8008-1c917dd3145b"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fechaemicompro}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="50" height="20" uuid="4714fa73-03a3-4092-a6ad-c45242eb9ba2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NotaDebitoDetalle_Cantidad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="50" y="0" width="55" height="20" uuid="64cabefd-9c7c-4f4c-890f-e2666ad70575"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NotaDebitoDetalle_Unidad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="105" y="0" width="327" height="20" uuid="ded3661d-2d43-4de9-80b0-ada84e9ac9fa"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NotaDebitoDetalle_Descripcion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="459" y="0" width="68" height="20" uuid="038f5657-5c24-46be-8d98-e634eb005939"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NotaDebitoDetalle_PrecioUnitario}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="554" y="0" width="66" height="20" uuid="1d2f2095-a23e-4d49-8b5a-3a4202f56995"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NotaDebitoDetalle_ValorVenta}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="432" y="0" width="27" height="20" uuid="172fb562-99ed-4178-bed1-6d9c6006f62b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NotaDebito_Moneda}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="527" y="0" width="27" height="20" uuid="da12f64e-0ea0-41ff-845c-ce17c983acde"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{NotaDebito_Moneda}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="75" splitType="Stretch">
+			<textField>
+				<reportElement x="18" y="23" width="375" height="20" uuid="39ac1966-0970-4644-9135-dc722bbb7fb0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NotaDebito_CodigoUnico}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="18" y="3" width="375" height="20" uuid="76f258e6-1dbf-400d-8ff5-0f8e1879350f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NotaDebito_Consecion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="4" y="43" width="413" height="30" uuid="49745bfc-fd89-4533-bf53-4d89ee5531aa"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{NotaDebito_Lectura}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="428" y="3" width="185" height="60" uuid="f8bf69d4-7c44-42ea-921d-e61c546a4b0f"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="428" y="3" width="72" height="20" uuid="5e78b8e6-6086-449a-9ce0-e68208389b48"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[SUB-TOTAL]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="510" y="3" width="103" height="20" uuid="30d8ac2b-1878-4df9-8f79-30ecb09ea618"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{NotaDebito_ValorVenta}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="428" y="23" width="72" height="20" uuid="7b767d7f-a41b-4293-9ccc-13139bebc169"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[IGV]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="510" y="23" width="103" height="20" uuid="02c80329-9c7b-4da6-bdeb-77b0ffc77465"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{NotaDebito_IGV}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="428" y="43" width="72" height="20" backcolor="#0084EB" uuid="451a279f-7417-4387-ba6a-8b2a732d3189"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[TOTAL]]></text>
+			</staticText>
+			<textField>
+				<reportElement mode="Opaque" x="510" y="43" width="103" height="20" forecolor="#FFFFFF" backcolor="#000000" uuid="dd084a74-b81f-477b-8cac-ac3cb0dbac33"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{NotaDebito_Total}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="500" y="3" width="10" height="20" uuid="a4b4de87-2009-4e4f-9d14-b137ca0ebbf3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NotaDebito_Moneda}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="500" y="23" width="10" height="20" uuid="0761e657-907e-48ed-a1b5-0cce40f673f1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NotaDebito_Moneda}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="500" y="43" width="10" height="20" forecolor="#FFFFFF" backcolor="#000000" uuid="33816a4c-e85d-4ba4-85a4-b3eff9acb78e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NotaDebito_Moneda}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="2" splitType="Stretch"/>
+	</pageFooter>
+</jasperReport>

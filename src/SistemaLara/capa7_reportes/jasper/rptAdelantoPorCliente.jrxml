@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="670" pageHeight="640" columnWidth="630" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="02123cff-fb3d-4774-97a0-9e89b8ec0e6c">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="codigo" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="totalNoPagadoSoles" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="totalNoPagadoDolares" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="logo" class="java.io.InputStream">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT 
+a.Adelanto_Id,
+a.Adelanto_Cantidad,
+a.Adelanto_Moneda,
+a.Adelanto_Descripcion,
+a.Adelanto_Fecha,
+a.Adeelanto_Estado,
+ce.ClienteEntrante_Apellidos,
+ce.ClienteEntrante_Nombres,
+ce.ClienteEntrante_DNI,
+ce.ClienteEntrante_Direccion,
+em.Empresa_Nombre_Comercial,
+em.Empresa_Direccion
+from adelanto as a INNER JOIN cliente_entrante as ce on ce.ClienteEntrante_Id=a.ClienteEntrante_Id
+INNER JOIN empresa as em on em.Empresa_id=a.Empresa_Id WHERE a.Adeelanto_Estado='No Pagado' and ce.ClienteEntrante_Id=$P{codigo}
+order by a.Adelanto_Fecha ASC]]>
+	</queryString>
+	<field name="Adelanto_Id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Adelanto_Cantidad" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Adelanto_Moneda" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Adelanto_Descripcion" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Adelanto_Fecha" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Adeelanto_Estado" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ClienteEntrante_Apellidos" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ClienteEntrante_Nombres" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ClienteEntrante_DNI" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ClienteEntrante_Direccion" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Empresa_Nombre_Comercial" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Empresa_Direccion" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="132" splitType="Stretch">
+			<rectangle>
+				<reportElement mode="Opaque" x="0" y="0" width="630" height="84" forecolor="#FFFFFF" backcolor="#FFFFFF" uuid="21014251-c9b3-460c-a37d-0671dcbdbc1e"/>
+			</rectangle>
+			<textField>
+				<reportElement x="14" y="90" width="241" height="20" uuid="ba0f9229-93af-418f-93ce-133c586dd9f9"/>
+				<textFieldExpression><![CDATA[$F{Empresa_Nombre_Comercial}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="355" y="6" width="254" height="23" uuid="674e08cb-2c4e-4557-8ddb-6bf6080dfaa9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ADELANTOS CLIENTE]]></text>
+			</staticText>
+			<line direction="BottomUp">
+				<reportElement x="0" y="0" width="26" height="30" forecolor="#FFFFFF" uuid="45b40532-7201-43bd-978a-4468236a5a94"/>
+			</line>
+			<line direction="BottomUp">
+				<reportElement x="0" y="0" width="38" height="44" forecolor="#FFFFFF" uuid="1d4f7f8e-3275-4fc9-8a79-b58c9202c02f"/>
+			</line>
+			<line>
+				<reportElement x="355" y="30" width="254" height="1" forecolor="#FF0000" uuid="239d775c-4677-47d2-9085-ebd73b0871e9"/>
+			</line>
+			<textField>
+				<reportElement x="355" y="31" width="117" height="20" uuid="fa6e24aa-f216-4d73-8d58-f60ae244097a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ClienteEntrante_Nombres}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="472" y="31" width="90" height="20" uuid="c67cfc1d-20a9-4982-a864-0ae5cac7d1de"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ClienteEntrante_Apellidos}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="562" y="32" width="47" height="19" uuid="0c133321-6ae1-424e-b10e-930e04309abb"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ClienteEntrante_DNI}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="285" y="0" width="70" height="77" forecolor="#FFFFFF" uuid="6eaec5ec-a6dd-4d2a-967e-72110b02101f"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<image>
+				<reportElement x="5" y="3" width="326" height="80" uuid="2e4c281c-322f-47d3-afd7-831ebe75e6c1"/>
+				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="4" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="21" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="48" height="20" forecolor="#FFFFFF" backcolor="#F15655" uuid="1a2b24f0-3d87-4a9a-9b0b-89297f976b36"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cod.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="129" y="1" width="58" height="20" forecolor="#FFFFFF" backcolor="#F15655" uuid="f9f1a87a-1067-4dd9-b357-1fea3b0a9244"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Moneda]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="187" y="1" width="253" height="20" forecolor="#FFFFFF" backcolor="#F15655" uuid="b4d4070c-1a3a-4c3a-8b7e-16bb4596f108"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Descripción]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="440" y="1" width="84" height="20" forecolor="#FFFFFF" backcolor="#F15655" uuid="9ed4dc17-792f-480a-b152-273ec339ac42"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Estado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="524" y="1" width="106" height="20" forecolor="#FFFFFF" backcolor="#F15655" uuid="cc5e27d9-1bf4-4fdd-8a3d-32b3aa681460"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="48" y="0" width="81" height="20" forecolor="#000000" backcolor="#FFFF33" uuid="f9a2433c-f668-4bfc-aa6a-fa9130928bfc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Importe]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="28" splitType="Stretch">
+			<textField>
+				<reportElement x="129" y="1" width="58" height="19" uuid="e6dde5f5-e5da-45df-a98f-5e319860cbd9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Adelanto_Moneda}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="440" y="1" width="84" height="20" uuid="d34cb5b8-89b9-4bdc-a8f9-ed7a9a0445c3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Adeelanto_Estado}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="187" y="1" width="253" height="27" uuid="9fcbe42d-5b91-4369-bfdb-2fe29658ed56"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Adelanto_Descripcion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="524" y="1" width="106" height="20" uuid="5c207472-2d27-44e7-9f44-fde33c62fa02"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Adelanto_Fecha}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="48" y="1" width="81" height="27" backcolor="#FFFF33" uuid="df0e1aa6-b0df-45d7-9f57-4dab5b029759"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Adelanto_Cantidad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="1" width="48" height="19" uuid="5b5f3946-bf60-416b-aa51-f0c17bcba219"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Adelanto_Id}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="1" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="67" splitType="Stretch">
+			<staticText>
+				<reportElement x="440" y="5" width="187" height="20" uuid="b522199c-fe87-403a-96ff-14de1651b53d"/>
+				<box>
+					<pen lineWidth="0.75" lineStyle="Double"/>
+					<topPen lineWidth="0.75" lineStyle="Double"/>
+					<leftPen lineWidth="0.75" lineStyle="Double"/>
+					<bottomPen lineWidth="0.75" lineStyle="Double"/>
+					<rightPen lineWidth="0.75" lineStyle="Double"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DETALLE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="440" y="25" width="100" height="20" uuid="db70b990-5ac1-4446-92e7-529086c7f6e4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Total No Pagado S/. :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="440" y="45" width="100" height="20" uuid="cdfac8b4-d1cd-4bf1-ad58-e6e6a930b687"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Total No Pagado $. :]]></text>
+			</staticText>
+			<textField pattern="">
+				<reportElement x="540" y="25" width="87" height="20" uuid="c24aa36f-a207-4ac4-8c2b-1b1af8d1587c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{totalNoPagadoSoles}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="540" y="45" width="87" height="20" uuid="4d2ef872-0ed6-43c0-a934-90ecbce422b8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{totalNoPagadoDolares}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>
